@@ -1,11 +1,11 @@
 """Custom exceptions.
 
-All the exceptions raised by the code in avazu-ctr-prediction.* should derive from Avazu-Ctr-PredictionException
+All the exceptions raised by the code in avazu_ctr_prediction.* should derive from Avazu-Ctr-PredictionException
 """
 
 
 class AvazuCtrPredictionException(Exception):
-    """Mother class for common avazu-ctr-prediction exceptions."""
+    """Mother class for common avazu_ctr_prediction exceptions."""
 
     pass
 

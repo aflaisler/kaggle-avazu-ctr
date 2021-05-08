@@ -2,7 +2,7 @@
 
 [[_TOC_]]
 
-avazu-ctr-prediction
+avazu_ctr_prediction
 ===============
 Kaggle competition Click-Through Rate Prediction (Avazu)
 
@@ -20,7 +20,7 @@ They are self documented. Just run `make` in the root directory to get a list of
 From the root directory: 
 
 1. `make create_environment`
-2. `conda activate avazu-ctr-prediction`
+2. `conda activate avazu_ctr_prediction`
 3. `make requirements`
 
 ## Update pinned-dependencies
@@ -51,7 +51,7 @@ From the root directory:
 You can now import it with: 
 
 ```python
-import avazu-ctr-prediction
+import avazu_ctr_prediction
 ```
 
 ## Project Organization
@@ -87,7 +87,7 @@ import avazu-ctr-prediction
     │
     ├── .bumpversion.cfg   <- configuration for the versioning auto-increment module
     │
-    ├── avazu-ctr-prediction
+    ├── avazu_ctr_prediction
     │   ├── __init__.py    <- Make a Python module
     │
     │   ├── data           <- Scripts to download or generate data

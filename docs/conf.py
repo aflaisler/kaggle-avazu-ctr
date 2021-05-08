@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# avazu-ctr-prediction documentation build configuration file, created by
+# avazu_ctr_prediction documentation build configuration file, created by
 # sphinx-quickstart.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -41,7 +41,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'avazu-ctr-prediction'
+project = u'avazu_ctr_prediction'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -164,7 +164,7 @@ html_static_path = ['_static']
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'avazu-ctr-predictiondoc'
+htmlhelp_basename = 'avazu_ctr_predictiondoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -184,8 +184,8 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
     ('index',
-     'avazu-ctr-prediction.tex',
-     u'avazu-ctr-prediction Documentation',
+     'avazu_ctr_prediction.tex',
+     u'avazu_ctr_prediction Documentation',
      u"Aymeric Flaisler", 'manual'),
 ]
 
@@ -215,7 +215,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'avazu-ctr-prediction', u'avazu-ctr-prediction Documentation',
+    ('index', 'avazu_ctr_prediction', u'avazu_ctr_prediction Documentation',
      [u"Aymeric Flaisler"], 1)
 ]
 
@@ -229,8 +229,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'avazu-ctr-prediction', u'avazu-ctr-prediction Documentation',
-     u"Aymeric Flaisler", 'avazu-ctr-prediction',
+    ('index', 'avazu_ctr_prediction', u'avazu_ctr_prediction Documentation',
+     u"Aymeric Flaisler", 'avazu_ctr_prediction',
      'Kaggle competition Click-Through Rate Prediction (Avazu)', 'Miscellaneous'),
 ]
 

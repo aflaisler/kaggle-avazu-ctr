@@ -77,17 +77,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/avazu-ctr-prediction.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/avazu_ctr_prediction.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/avazu-ctr-prediction.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/avazu_ctr_prediction.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/avazu-ctr-prediction"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/avazu-ctr-prediction"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/avazu_ctr_prediction"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/avazu_ctr_prediction"
 	@echo "# devhelp"
 
 epub:

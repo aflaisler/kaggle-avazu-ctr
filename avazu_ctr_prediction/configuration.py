@@ -35,14 +35,14 @@ def initialise_run(config: dict, user: str) -> dict:
     # Model id
     run_dict["uuid"] = uuid.uuid4()
     run_dict["user"] = user
-    run_dict["project"] = "avazu-ctr-prediction"
+    run_dict["project"] = "avazu_ctr_prediction"
     run_dict["packaged_version"] = str(
         pkg_resources.get_distribution("c4.sales_segmentation")
     )
 
     if call(["git", "branch"], stderr=STDOUT, stdout=open(os.devnull, "w")) != 0:
         # If we aren't inside a git repo, set to the package version
-        run_dict["git_commit"] = str(pkg_resources.get_distribution("c4.avazu-ctr-prediction"))
+        run_dict["git_commit"] = str(pkg_resources.get_distribution("c4.avazu_ctr_prediction"))
     else:
         run_dict["git_commit"] = (
             spanner.utils.git_sha_short().decode("utf-8").strip("\n")

@@ -1,4 +1,4 @@
-"""Entry point for avazu-ctr-prediction library."""
+"""Entry point for avazu_ctr_prediction library."""
 import click
 from loguru import logger
 
@@ -8,7 +8,7 @@ def cli():
 
     To start using it run a command like:
 
-    "avazu-ctr-prediction bau --option1=test_option --debug"
+    "avazu_ctr_prediction bau --option1=test_option --debug"
     """
     pass
 

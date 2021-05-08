@@ -99,9 +99,9 @@ if "%1" == "qthelp" (
 	echo.
 	echo.Build finished; now you can run "qcollectiongenerator" with the ^
 .qhcp project file in %BUILDDIR%/qthelp, like this:
-	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\avazu-ctr-prediction.qhcp
+	echo.^> qcollectiongenerator %BUILDDIR%\qthelp\avazu_ctr_prediction.qhcp
 	echo.To view the help file:
-	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\avazu-ctr-prediction.ghc
+	echo.^> assistant -collectionFile %BUILDDIR%\qthelp\avazu_ctr_prediction.ghc
 	goto end
 )
 

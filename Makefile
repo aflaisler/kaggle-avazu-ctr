@@ -9,7 +9,7 @@ PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = aws-c4-bdap-ds-development
 PROFILE = aws-c4-bdap-ds
 REGION =  eu-west-1
-PROJECT_NAME = avazu-ctr-prediction
+PROJECT_NAME = avazu_ctr_prediction
 PYTHON_INTERPRETER = $(shell which python)
 VERSION := $(shell $(PYTHON_INTERPRETER) setup.py --version)
 
@@ -41,7 +41,7 @@ update_dependencies:
 
 ## Make Dataset
 data: requirements
-	$(PYTHON_INTERPRETER) avazu-ctr-prediction/data/make_dataset.py data/raw data/processed
+	$(PYTHON_INTERPRETER) avazu_ctr_prediction/data/make_dataset.py data/raw data/processed
 
 ## Delete all compiled Python files
 clean:
@@ -49,7 +49,7 @@ clean:
 	rm -rf build
 	rm -rf tests/.cache
 	rm -rf .pytest_cache
-	rm -rf avazu-ctr-prediction/*.egg-info
+	rm -rf avazu_ctr_prediction/*.egg-info
 	rm -rf *.egg-info
 	rm -rf .eggs
 	find . -name *.log -type f -delete
@@ -60,15 +60,15 @@ clean:
 
 ## Lint using black
 lint:
-	black avazu-ctr-prediction
+	black avazu_ctr_prediction
 
 ## Run unit tests only
 run_unit_tests:
-	$(PYTHON_INTERPRETER) -m pytest -m "not integration" --cov=avazu-ctr-prediction --tb=short --disable-warnings
+	$(PYTHON_INTERPRETER) -m pytest -m "not integration" --cov=avazu_ctr_prediction --tb=short --disable-warnings
 
 ## Run all tests
 run_all_tests:
-	$(PYTHON_INTERPRETER) -m pytest --cov=avazu-ctr-prediction --tb=short --disable-warnings
+	$(PYTHON_INTERPRETER) -m pytest --cov=avazu_ctr_prediction --tb=short --disable-warnings
 
 ## Build python package
 build: clean lint
@@ -127,7 +127,7 @@ else
 endif
 	# add kernel to Jupyter
 	source activate $(PROJECT_NAME) && conda install ipykernel -y && $(PYTHON_INTERPRETER) -m ipykernel install --user --name=$(PROJECT_NAME)
-	@echo ">>> New env created and kernel installed within Jupyter. Activate with:\nconda activate $(PROJECT_NAME)"
+	@echo ">>> New env created and kernel installed within Jupyter. Activate with: conda activate $(PROJECT_NAME)"
 
 ## Test python environment is setup correctly
 test_environment:
