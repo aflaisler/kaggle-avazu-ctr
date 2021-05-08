@@ -1,0 +1,48 @@
+
+features = []
+
+fit_params = {}
+
+
+# Defines the model
+[model]
+    name = "model"
+    module =  "sklearn.linear_model"
+    class = "Lasso"
+    params = {}
+
+
+# Defines different preprocessing steps for different subsets of features
+[[preprocessing]]
+    # Subset of features
+    features = []
+
+    # Preprocessing applied to the above subset
+    [[preprocessing.steps]]
+        name = "scaler"
+        module = "sklearn.preprocessing"
+        class = "StandardScaler"
+        params = {with_mean = true}
+
+[[preprocessing]]
+    # Another subset of features
+    # Empty list IS allowed if we don't want to apply to any features.
+    features = []
+
+    # Different preprocessing to apply to this subset
+    [[preprocessing.steps]]
+        name = "ohe"
+        module = "sklearn.preprocessing"
+        class = "OneHotEncoder"
+        params = {sparse = false}
+
+    # We can add arbitrary number of steps
+    #[[preprocessing.steps]]
+    #    name = "imputer"
+    #    module = "sklearn.preprocessing"
+    #    class = "SimpleImputer"
+    #    params = {}
+
+
+
+

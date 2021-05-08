@@ -1,0 +1,16 @@
+# Add package (add as you go)
+loguru
+numpy
+pandas
+toml
+bump2version
+
+# external requirements
+click
+Sphinx
+coverage
+black
+flake8
+pip-tools
+python-dotenv>=0.5.1
+pytest-cov
