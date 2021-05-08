@@ -4,6 +4,9 @@ numpy
 pandas
 toml
 bump2version
+pandas-profiling
+sklearn
+lightgbm
 
 # external requirements
 click

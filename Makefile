@@ -1,4 +1,4 @@
-.PHONY: clean data lint requirements sync_data_to_s3 sync_data_from_s3
+.PHONY: clean data lint requirements
 SHELL := /usr/bin/env bash
 
 #################################################################################
@@ -81,16 +81,7 @@ ifeq (prod,$(environment))
 else
 	bumpversion patch
 endif
-	# add and commit
-	git add -u
-	NEW_PACKAGE_VERSION=$(python setup.py --version)
-	git commit -m "Release $NEW_PACKAGE_VERSION"
-	git push
 
-
-## Upload python package to Nexus
-upload: clean build bump_version
-	twine upload -r c4nexus dist/*.whl
 
 ## Upload Data to S3
 sync_data_to_s3:

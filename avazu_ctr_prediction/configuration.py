@@ -7,8 +7,7 @@ from subprocess import STDOUT, call
 import os
 
 from loguru import logger
-import spanner.utils
-import spanner.resultsdb
+
 
 import avazu_ctr_prediction.constants
 
@@ -20,33 +19,33 @@ def load_conf() -> dict:
     return conf
 
 
-def initialise_run(config: dict, user: str) -> dict:
+def initialise_run(config: dict) -> dict:
     """
     Create run dict at the start of a run.
 
     Parameters
     ----------
     config: configuration of the model
-    user: user running the pipeline
     """
     run_dict = dict()
     run_dict["conf"] = config
     run_dict["start_ts"] = datetime.datetime.now()
     # Model id
     run_dict["uuid"] = uuid.uuid4()
-    run_dict["user"] = user
     run_dict["project"] = "avazu_ctr_prediction"
     run_dict["packaged_version"] = str(
-        pkg_resources.get_distribution("c4.sales_segmentation")
+        pkg_resources.get_distribution("avazu_ctr_prediction")
     )
-
-    if call(["git", "branch"], stderr=STDOUT, stdout=open(os.devnull, "w")) != 0:
-        # If we aren't inside a git repo, set to the package version
-        run_dict["git_commit"] = str(pkg_resources.get_distribution("c4.avazu_ctr_prediction"))
-    else:
-        run_dict["git_commit"] = (
-            spanner.utils.git_sha_short().decode("utf-8").strip("\n")
-        )
+    # TODO: figure out if we keep
+    # if call(["git", "branch"], stderr=STDOUT, stdout=open(os.devnull, "w")) != 0:
+    #     # If we aren't inside a git repo, set to the package version
+    #     run_dict["git_commit"] = str(
+    #         pkg_resources.get_distribution("c4.avazu_ctr_prediction")
+    #     )
+    # else:
+    #     run_dict["git_commit"] = (
+    #         spanner.utils.git_sha_short().decode("utf-8").strip("\n")
+    #     )
 
     return run_dict
 
@@ -77,7 +76,5 @@ def finalise_run_and_log_to_resultsdb(run_dict, metrics={}, merge=False):
 
     run_dict["results"] = metrics
     run_dict["end_ts"] = datetime.datetime.now()
-    spanner.resultsdb.log_experiment(run_dict, merge=merge)
-
-    logger.info(f"Run {run_dict['uuid']} added to results database.")
-    logger.info("Finished writing run to results database.")
+    # TODO: save run metadata
+    logger.info("Finished writing run results.")

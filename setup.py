@@ -4,7 +4,7 @@ with open("requirements.txt", "r") as fh:
     install_requires = [req for req in fh.read().splitlines() if "==" in req]
 
 setup(
-    name='c4.avazu_ctr_prediction',
+    name='avazu_ctr_prediction',
     version='0.1.0.dev0',
     description='Kaggle competition Click-Through Rate Prediction (Avazu).',
     author='Aymeric Flaisler',

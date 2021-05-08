@@ -1,40 +1,29 @@
 
-features = []
-
 fit_params = {}
 
 
 # Defines the model
 [model]
     name = "model"
-    module =  "sklearn.linear_model"
-    class = "Lasso"
+    module = "lightgbm.sklearn"
+    class = "LGBMClassifier"
     params = {}
 
 
 # Defines different preprocessing steps for different subsets of features
 [[preprocessing]]
-    # Subset of features
-    features = []
-
-    # Preprocessing applied to the above subset
-    [[preprocessing.steps]]
-        name = "scaler"
-        module = "sklearn.preprocessing"
-        class = "StandardScaler"
-        params = {with_mean = true}
-
-[[preprocessing]]
-    # Another subset of features
+    # subset of features
     # Empty list IS allowed if we don't want to apply to any features.
-    features = []
+    features = [
+        "C17",
+        "C14"]
 
     # Different preprocessing to apply to this subset
     [[preprocessing.steps]]
-        name = "ohe"
+        name = "oe"
         module = "sklearn.preprocessing"
-        class = "OneHotEncoder"
-        params = {sparse = false}
+        class = "OrdinalEncoder"
+        params = {}
 
     # We can add arbitrary number of steps
     #[[preprocessing.steps]]
