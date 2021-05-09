@@ -61,11 +61,11 @@ def train(X_train: pd.DataFrame, y_train: pd.DataFrame, config: dict) -> Pipelin
 
 
 def train_and_predict(
-        X_train: pd.DataFrame, y_train: pd.DataFrame, X_test: pd.DataFrame, config: dict
+    X_train: pd.DataFrame, y_train: pd.DataFrame, X_test: pd.DataFrame, config: dict
 ) -> (Pipeline, np.array):
     """Return model and prediction probability for X_test."""
     logger.info(f"Training the classification.")
     model = train(X_train, np.ravel(y_train), config)
     test_proba_predictions = model.predict_proba(X_test)
 
-    return model, test_proba_predictions[:, 1]
+    return model, test_proba_predictions

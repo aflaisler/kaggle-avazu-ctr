@@ -5,18 +5,29 @@ fit_params = {}
 # Defines the model
 [model]
     name = "model"
-    module = "lightgbm.sklearn"
-    class = "LGBMClassifier"
-    params = {}
+    module = "catboost.core"
+    class = "CatBoostClassifier"
+    params = {n_estimators = 1000}
 
 
 # Defines different preprocessing steps for different subsets of features
 [[preprocessing]]
     # subset of features
     # Empty list IS allowed if we don't want to apply to any features.
-    features = [
-        "C17",
-        "C14"]
+    features = ['C1',
+            'C15',
+            'C16',
+            'C17',
+            'C18',
+            'C19',
+            'C20',
+            'C21',
+            'app_category',
+            'app_domain',
+            'banner_pos',
+            'device_conn_type',
+            'device_type',
+            'site_category']
 
     # Different preprocessing to apply to this subset
     [[preprocessing.steps]]

@@ -8,6 +8,7 @@ import avazu_ctr_prediction.configuration
 from avazu_ctr_prediction.constants import FEATURES, TARGET, RANDOM_STATE
 from avazu_ctr_prediction.ml_pipeline import train_and_predict
 from avazu_ctr_prediction.utils import check_columns
+from sklearn.metrics import log_loss
 
 
 @click.group()
@@ -37,10 +38,12 @@ def cmd_train(data_location: str, debug: bool):
     check_columns(df_data, FEATURES + [TARGET])
     X = df_data[FEATURES]
     y = df_data[TARGET]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.05, random_state=RANDOM_STATE)
-    model, predictons = train_and_predict(
-        X_train, y_train, X_test, model_config
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=RANDOM_STATE
     )
+    model, predictions = train_and_predict(X_train, y_train, X_test, model_config)
+    log_loss_ = log_loss(y_test, predictions)
+    logger.info(f"Log loss: {log_loss_}")
 
     logger.info("End of the run.")
 
