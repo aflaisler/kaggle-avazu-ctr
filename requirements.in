@@ -6,7 +6,7 @@ toml
 bump2version
 pandas-profiling
 sklearn
-lightgbm
+catboost
 
 # external requirements
 click

@@ -3,8 +3,9 @@
 import pandas as pd
 import toml
 from loguru import logger
+from sklearn.base import BaseEstimator, TransformerMixin
 
-from avazu_ctr_prediction.constants import CAT_PATH, CAT_FREQ_MIN
+from avazu_ctr_prediction.constants import CAT_PATH
 
 
 def category_to_keep(df: pd.DataFrame, output_filepath: str, freq_min: float) -> None:
@@ -25,9 +26,10 @@ def map_rare_category(df: pd.DataFrame) -> pd.DataFrame:
     with open(CAT_PATH) as conf_file:
         map_col_cat = toml.load(conf_file)
     for column in df.columns:
-        logger.info(f"Mapping categories under {CAT_FREQ_MIN} for the column: {column}")
+        logger.info(f"Mapping rare categories for the column: {column}")
+        # TODO: create a new dataframe object?
         df.loc[:, column] = (
-            df[column]
+            df.loc[:, column]
             .map(
                 lambda cat: f"{column}_rare" if cat not in map_col_cat[column] else cat
             )
@@ -35,3 +37,17 @@ def map_rare_category(df: pd.DataFrame) -> pd.DataFrame:
         )
 
     return df
+
+
+class ColumnFilter(BaseEstimator, TransformerMixin):
+    def __init__(self, columns_to_keep):
+        self.columns_to_keep = columns_to_keep
+
+    def transform(self, X):
+        return X[self.columns_to_keep]
+
+    def fit(self, X, y=None, **fit_params):
+        return self
+
+    def fit_transform(self, X, y=None, **fit_params):
+        return X[self.columns_to_keep]

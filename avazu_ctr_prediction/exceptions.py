@@ -10,6 +10,12 @@ class AvazuCtrPredictionException(Exception):
     pass
 
 
+class MissingModelException(AvazuCtrPredictionException):
+    """Exception raised when a parameter cannot be found in the configuration."""
+
+    pass
+
+
 class MissingConfigurationParamException(AvazuCtrPredictionException):
     """Exception raised when a parameter cannot be found in the configuration."""
 

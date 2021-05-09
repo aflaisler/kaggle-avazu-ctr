@@ -1,0 +1,75 @@
+
+features = ["C1",
+            "C15",
+            "C16",
+            "C17",
+            "C18",
+            "C19",
+            "C20",
+            "C21",
+            "app_category",
+            "app_domain",
+            "app_id",
+            "banner_pos",
+            "device_conn_type",
+            "device_id",
+            "device_model",
+            "device_type",
+            "hour",
+            "site_category",
+            "site_domain",
+            "site_id"]
+
+fit_params = {}
+
+
+# Defines the model
+[model]
+    name = "model"
+    module = "catboost.core"
+    class = "CatBoostClassifier"
+    params = {n_estimators = 1000}
+
+
+# Defines different preprocessing steps for different subsets of features
+[[preprocessing]]
+    # subset of features
+    # Empty list IS allowed if we don"t want to apply to any features.
+    features = ["C1",
+                "C15",
+                "C16",
+                "C17",
+                "C18",
+                "C19",
+                "C20",
+                "C21",
+                "app_category",
+                "app_domain",
+                "app_id",
+                "banner_pos",
+                "device_conn_type",
+                "device_id",
+                "device_model",
+                "device_type",
+                "hour",
+                "site_category",
+                "site_domain",
+                "site_id"]
+
+    # Different preprocessing to apply to this subset
+    [[preprocessing.steps]]
+        name = "oe"
+        module = "sklearn.preprocessing"
+        class = "OrdinalEncoder"
+        params = {}
+
+    # We can add arbitrary number of steps
+    #[[preprocessing.steps]]
+    #    name = "imputer"
+    #    module = "sklearn.preprocessing"
+    #    class = "SimpleImputer"
+    #    params = {}
+
+
+
+

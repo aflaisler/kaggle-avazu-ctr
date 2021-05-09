@@ -1,0 +1,76 @@
+
+# feature to filter for all the steps
+features = [
+    "hour",
+    "C1",
+    "banner_pos",
+    "site_category",
+    "app_domain",
+    "app_category",
+    "device_type",
+    "device_conn_type",
+    "C14",
+    "C15",
+    "C16",
+    "C18",
+    "C19",
+    "C20",
+    "C21",
+]
+
+fit_params = {}
+
+
+# Defines the model
+[model]
+    name = "model"
+    module = "sklearn.linear_model"
+    class = "LogisticRegression"
+    params = {}
+
+
+# Defines different preprocessing steps for different subsets of features
+[[preprocessing]]
+    # subset of features
+    # Empty list IS allowed if we don't want to apply to any features.
+    features = [
+    "hour",
+    "C1",
+    "banner_pos",
+    "site_category",
+    "app_domain",
+    "app_category",
+    "device_type",
+    "device_conn_type",
+    "C14",
+    "C15",
+    "C16",
+    "C18",
+    "C19",
+    "C20",
+    "C21",
+]
+
+#    # Different preprocessing to apply to this subset
+#    [[preprocessing.steps]]
+#        name = "filter_columns"
+#        module = "avazu_ctr_prediction.preprocess"
+#        class = "ColumnFilter"
+#        params = {columns_to_keep = ["hour"]}
+
+    [[preprocessing.steps]]
+        name = "ohe"
+        module = "sklearn.preprocessing"
+        class = "OneHotEncoder"
+        params = {sparse = false}
+
+    # We can add arbitrary number of steps
+    #[[preprocessing.steps]]
+    #    name = "imputer"
+    #    module = "sklearn.preprocessing"
+    #    class = "SimpleImputer"
+    #    params = {}
+
+
+
+

@@ -7,10 +7,9 @@ import numpy as np
 import pandas as pd
 from loguru import logger
 from sklearn.compose import ColumnTransformer
-from sklearn.metrics import log_loss
 from sklearn.pipeline import Pipeline
 
-from avazu_ctr_prediction.constants import FEATURES
+from avazu_ctr_prediction.preprocess import ColumnFilter
 
 
 def object_from_dict(object_definition: dict) -> object:
@@ -27,21 +26,23 @@ def object_from_dict(object_definition: dict) -> object:
     return object_
 
 
-def make_pipeline(steps: list) -> Pipeline:
+def make_pipeline(steps: list, config: dict) -> Pipeline:
     """Create unfitted sklearn pipeline object as defined in config."""
-    steps = [(step["name"], object_from_dict(step)) for step in steps if step]
+    steps = [("filter_columns", ColumnFilter(columns_to_keep=config["features"]))] + [
+        (step["name"], object_from_dict(step)) for step in steps if step
+    ]
     return Pipeline(steps)
 
 
 def make_preprocessor(config: dict) -> ColumnTransformer:
     """Create sklearn preprocessor object as defined in config."""
     preprocessors = [
-        (str(i), make_pipeline(definition["steps"]), definition["features"])
+        (str(i), make_pipeline(definition["steps"], config), definition["features"])
         for i, definition in enumerate(config["preprocessing"])
     ]
     processed_features = [d["features"] for d in config["preprocessing"]]
     processed_features = list(pd.core.common.flatten(processed_features))
-    unprocessed_feats = [x for x in FEATURES if x not in processed_features]
+    unprocessed_feats = [x for x in config["features"] if x not in processed_features]
 
     preprocessors.append(("passthrough", "passthrough", unprocessed_feats))
     return ColumnTransformer(preprocessors)
