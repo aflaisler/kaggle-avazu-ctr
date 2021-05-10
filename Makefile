@@ -28,6 +28,10 @@ requirements: test_environment
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
+## Install the package in editable mode
+dev_install: requirements
+	$(PYTHON_INTERPRETER) -m pip install -e .
+
 ## Update requirements.txt with the required packages needed by the project (requirements.in)
 update_requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip-tools
@@ -94,11 +98,6 @@ else
 	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
 	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
 endif
-
-## add kernel to Jupyter
-add_kernel:
-	conda install ipykernel -y && $(PYTHON_INTERPRETER) -m ipykernel install --user --name=$(PROJECT_NAME)
-	@echo ">>> New env created and kernel installed within Jupyter. Activate with: conda activate $(PROJECT_NAME)"
 
 ## Test python environment is setup correctly
 test_environment:

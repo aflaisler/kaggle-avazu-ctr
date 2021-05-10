@@ -16,12 +16,52 @@ To install conda, follow [these instructions](https://conda.io/projects/conda/en
 We use the makefile to abstract all the different commands available for the project.
 They are self documented. Just run `make` in the root directory to get a list of them.
 
-## Create Environment
+## Create Environment and install the package
 From the root directory: 
 
 1. `make create_environment`
 2. `conda activate avazu_ctr_prediction`
-3. `make requirements`
+3. `make dev_install`
+
+You can now import it with: 
+
+```python
+import avazu_ctr_prediction
+```
+
+## Run the package
+In order to do the training on the full dataset, we recommend a machine with ~100GB of ram and 32 physical CPUs.
+With such a configuration, the training run should take ~10min. 
+
+### Train the model
+Once the package is installed, to train the model, run:
+```shell
+avazu_ctr_prediction train <training data location>
+```
+ie:
+```shell
+avazu_ctr_prediction train data/X_train_xsmall.csv
+```
+
+### Do a prediction
+Once the package is installed, and the model has been run:
+```shell
+avazu_ctr_prediction predict <test data location>
+```
+ie:
+```shell
+avazu_ctr_prediction predict data/X_test_xsmall.csv
+```
+
+### Evaluate
+Once the package is installed, and the model has been run:
+```shell
+avazu_ctr_prediction eval <test-label data location>
+```
+ie:
+```shell
+avazu_ctr_prediction eval data/y_test_xsmall.csv
+```
 
 ## Update pinned-dependencies
 In order to keep our builds stable across environments and over time, we use a tool called `pip-compile` (from [Pip-tools](https://github.com/jazzband/pip-tools) ) to automatically pin the dependencies along with the sub-dependencies.
@@ -48,22 +88,12 @@ From the root directory:
 `make bump_version` (or `make bump_version environment=prod` for non dev version) 
 2. Run `make build`
 
-You can now import it with: 
-
-```python
-import avazu_ctr_prediction
-```
-
 ## Project Organization
 
     ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
+    ├── Makefile           <- Makefile with commands like `make dev_install`
     ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    ├── data               <- The original, immutable data dump.
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
@@ -73,38 +103,18 @@ import avazu_ctr_prediction
     │                         the creator's initials, and a short `-` delimited description, e.g.
     │                         `1.0-jqp-initial-data-exploration`.
     │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
     │
     ├── requirements.in   <- The requirements file for pinning the requirements
     │
     ├── requirements.txt   <- The requirements file for reproducing the builds environment, e.g.
     │                         generated with `pip-compile --no-emit-index-url requirements.in`
     │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── setup.py           <- Makes project pip installable (pip install -e .) so src can be imported
     │
-    ├── .bumpversion.cfg   <- configuration for the versioning auto-increment module
+    ├── .bumpversion.cfg   <- Configuration for the versioning auto-increment module
     │
-    ├── avazu_ctr_prediction
-    │   ├── __init__.py    <- Make a Python module
-    │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    |   │   └── build_features.py
-    │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │      └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    ├── avazu_ctr_prediction    <- The actual package│
 
 
 
